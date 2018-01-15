@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  <button id="refresh">New Gif</button>
+  <form>
+    <input id="term" type="search" name="search" placeholder="title">
+  </form>
+  <br>
+  <img src="#">
+  <script>
+  const img = document.querySelector('img');
+  const refresher = document.querySelector('#refresh');
+  function getGif(input) {fetch(`https://api.giphy.com/v1/gifs/translate?api_key=PM0RBvkXPQSadf9sNYiEaQ9dCnecnz9R&s=${input}`,
+       {mode: 'cors'})
+       .then(function(response) {
+         return response.json()
+       })
+       .then(function(response) {
+         img.src = (response.data.images.original.url)
+       })
+    };
+   refresher.addEventListener('click', function(){
+     let term = document.getElementById('term').value;
+     getGif(term);
+   })
+   getGif('cats');
+  </script>
+</body>
+</html>
